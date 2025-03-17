@@ -14,6 +14,15 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
+    - name: Set up Node.js (needed for PostCSS)
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'  # Use latest LTS version
+
+    - name: Install PostCSS dependencies
+      run: |
+        npm install -g postcss postcss-cli
+        
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
