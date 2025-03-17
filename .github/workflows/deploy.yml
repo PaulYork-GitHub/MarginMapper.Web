@@ -1,0 +1,36 @@
+name: Deploy Jekyll site to Azure Storage
+
+on:
+  push:
+    branches:
+      - main  # Trigger on push to the main branch
+  workflow_dispatch:  # Allows manual triggering from GitHub UI
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '2.7'
+
+    - name: Install dependencies
+      run: |
+        gem install bundler
+        bundle install
+
+    - name: Build Jekyll site
+      run: |
+        bundle exec jekyll build
+
+    - name: Upload to Azure Storage
+      uses: azure/storage-blob-upload-action@v1
+      with:
+        connection-string: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
+        container-name: ${{ secrets.AZURE_STORAGE_CONTAINER_NAME }}
+        source-folder: './_site'
