@@ -29,7 +29,7 @@ jobs:
         bundle exec jekyll build
 
     - name: Upload to Azure Storage
-      uses: azure/storage-blob-upload-action@v2
+      uses: LanceMcCarthy/Action-AzureBlobUpload@v2
       with:
         connection-string: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
         container-name: ${{ secrets.AZURE_STORAGE_CONTAINER_NAME }}
