@@ -37,9 +37,6 @@ jobs:
       run: |
         bundle exec jekyll build --trace
 
-    - name: Upload to Azure Storage
-      uses: LanceMcCarthy/Action-AzureBlobUpload@v2
-      with:
-        connection_string: ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}
-        container_name: ${{ secrets.AZURE_STORAGE_CONTAINER_NAME }}
-        source_folder: './_site'
+    - name: Upload with Azure CLI
+      run: |
+        az storage blob upload-batch --destination ${{ secrets.AZURE_STORAGE_CONTAINER_NAME }} --source ./_site --connection-string ${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}    
