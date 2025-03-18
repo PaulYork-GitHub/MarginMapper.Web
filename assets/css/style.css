@@ -106,16 +106,13 @@
     padding:0;
     margin-left:auto;
     background:0 0;
+    margin-left:10px;
     border:0;
-    width:inherit;
-    position:absolute;
+    width:30%;
     background-color:transparent;
-    top:2px;
-    left:15px;
     font-size:1em;
     color:#505050;
     box-shadow:none;
-    text-align:left
 }
 .buttons #cancel:hover{
     color:#000!important
@@ -996,6 +993,22 @@ div#api > div.heading h1 {
   line-height: 2.5rem;
 	font-weight:800;
 	padding-bottom:10px;
+}
+
+.sendCode,
+.verifyCode
+.sendNewCode,
+.changeClaims
+{
+    background-color: #1e758d !important;
+}
+
+.sendCode:hover,
+.verifyCode:hover
+.sendNewCode:hover,
+.changeClaims:hover
+{
+    background-color: #0c2f39  !important;
 }
 
 
