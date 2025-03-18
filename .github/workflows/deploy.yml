@@ -36,10 +36,15 @@ jobs:
     - name: Build Jekyll site
       run: |
         bundle exec jekyll build --trace
-
+    
+    - name: Debug Storage Variables
+      run: |
+          echo "Container Name: ${{ secrets.AZURE_STORAGE_CONTAINER_NAME }}"
+          echo "Connection String Length: $(echo -n "${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}" | wc -c)"
+          
     - name: Upload with Azure CLI
       run: |
         az storage blob upload-batch \
-        --destination "${{ secrets.AZURE_STORAGE_CONTAINER_NAME }}" \
         --source "./_site" \
+        --destination "${{ secrets.AZURE_STORAGE_CONTAINER_NAME }}" \
         --connection-string "${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}"
