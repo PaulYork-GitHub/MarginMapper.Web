@@ -39,13 +39,10 @@ jobs:
     
     - name: Debug Storage Variables
       run: |
-          echo "Container Name: ${{ secrets.AZURE_STORAGE_CONTAINER_NAME }}"
-          echo "Container Name Length: $(echo -n "${{ secrets.AZURE_STORAGE_CONTAINER_NAME }}" | wc -c)"
-          echo "Connection String Length: $(echo -n "${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}" | wc -c)"
+        echo "Container Name: ${{ secrets.AZURE_STORAGE_CONTAINER_NAME }}"
+        echo "Container Name Length: $(echo -n "${{ secrets.AZURE_STORAGE_CONTAINER_NAME }}" | wc -c)"
+        echo "Connection String Length: $(echo -n "${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}" | wc -c)"
 
     - name: Upload with Azure CLI
       run: |
-        az storage blob upload-batch \
-        --source "./_site" \
-        --destination "${{ secrets.AZURE_STORAGE_CONTAINER_NAME }}" \
-        --connection-string "${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}"
+        az storage blob upload-batch --source "./_site" --destination "${{ secrets.AZURE_STORAGE_CONTAINER_NAME }}" --connection-string "${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}"
